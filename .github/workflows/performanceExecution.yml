@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
     inputs:
       testSuite:
-        type: string
-        description: 'testSuite'
-        required: true
         default: 'restfulapi.RestfulApiTest'
 jobs:
   execRestfulApi:
