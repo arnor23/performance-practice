@@ -22,3 +22,10 @@ jobs:
 
       - name: Execute test
         run: gradle gatlingRun --simulation=restfulapi.RestfulApiTest
+
+      - name: Save report
+        if: ${{always()}}
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: gatling report
+          path: ./build/reports/gatling
