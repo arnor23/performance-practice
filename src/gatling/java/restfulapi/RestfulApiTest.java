@@ -3,6 +3,8 @@ package restfulapi;
 import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
+import java.time.Duration;
+
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.core.CoreDsl.ElFileBody;
 import static io.gatling.javaapi.http.HttpDsl.*;
@@ -10,6 +12,7 @@ import static io.gatling.javaapi.http.HttpDsl.*;
 public class RestfulApiTest extends Simulation {
 
     String baseUrl = System.getProperty("baseUrl", "https://api.restful-api.dev/objects");
+    String concurrentUsers = System.getProperty("concurrentUsers", "5");
 
     FeederBuilder.FileBased<Object> feeder = jsonFile("data/appliances.json").circular();
 
@@ -38,8 +41,9 @@ public class RestfulApiTest extends Simulation {
 
     {
         setUp(
-                scn.injectOpen(
-                        rampUsers(10).during(10)
+                scn.injectClosed(
+                        constantConcurrentUsers(Integer.parseInt(concurrentUsers)).during(Duration.ofSeconds(10)
+                        )
                 )
         ).protocols(httpProtocol);
     }
