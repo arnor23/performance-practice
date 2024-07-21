@@ -14,4 +14,4 @@ jobs:
     name: Executing Restful API Test
     steps:
       - name: Checkout code
-        uses: action/checkout@v3
+        uses: action/checkout@v2
