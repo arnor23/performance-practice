@@ -4,6 +4,7 @@ import io.gatling.javaapi.core.*;
 import io.gatling.javaapi.http.*;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
+import static io.gatling.javaapi.core.CoreDsl.ElFileBody;
 import static io.gatling.javaapi.http.HttpDsl.*;
 
 public class RestfulApiTest extends Simulation {
@@ -25,7 +26,9 @@ public class RestfulApiTest extends Simulation {
 
             .exec(http("Update Appliance")
                     .patch("/#id")
+                    .body(ElFileBody("data/PutBody.json"))
                     .check(status().is(200)))
+
 
             .exec(http("Get Appliance")
                     .get("/#{id}")
