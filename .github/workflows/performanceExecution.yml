@@ -4,11 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       testSuite:
+        type: string
+        description: 'testSuite'
+        required: true
         default: 'restfulapi.RestfulApiTest'
+
 jobs:
-  execRestfulApi:
+  execrestfulapi:
     runs-on: ubuntu-latest
-    name: Executing Restful API Test
+    name: Executing Restful API
     steps:
       - name: Checkout code
-        uses: action/checkout@v3
+        uses: actions/checkout@v3
